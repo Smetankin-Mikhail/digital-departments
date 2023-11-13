@@ -1,14 +1,21 @@
 # TODO  Напишите функцию count_letters
+
 def count_letters(text):
     lower_text = text.lower() # Возводим текст в нижний регистр
     dict_ = {} # создаем пустой словарь
-    defaunt_count = 0
     for i in range(len(lower_text)): # Наполняем словарь
         if lower_text[i].isalpha(): # Если символ буква
-            dict_[lower_text[i]] = dict_.get(lower_text[i], defaunt_count)+1
-        total = sum(dict_.values())
-        total_dict_ = int(dict_.values()) / total
-    print(total_dict_)
+            dict_[lower_text[i]] = dict_.get(lower_text[i], 0)+1 # если значение уже было то lower_text[i]+1 если нет, то 0+1
+
+    calculate_frequency(dict_) # Вызываем функцию calculate_frequency
+
+# TODO Напишите функцию calculate_frequency
+def calculate_frequency(total_dict):
+    total_symbol = sum(total_dict.values()) # кол-во всех букв
+    for key, value in total_dict.items(): # цикл для вычесления частоты каждой буквы
+        value = total_dict[key]/total_symbol # частота каждой буквы
+        total_value = "{:.2f}".format(value) # частота округлена до двух знаков после запятой
+        print(f'{key}: {total_value}')
 
 main_str = """
 У лукоморья дуб зелёный;
@@ -45,6 +52,6 @@ main_str = """
 Под ним сидел, и кот учёный
 Свои мне сказки говорил.
 """
-print(count_letters(main_str))
 
 # TODO Распечатайте в столбик букву и её частоту в тексте
+count_letters(main_str)
